@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Typist - Practice Your Notes</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1><i class="fas fa-keyboard"></i> Study Typist - Practice Your Notes</h1>
+            <p>Upload your notes and practice typing them</p>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="nav-tabs">
+            <button class="tab-btn active" onclick="showTab('upload')">
+                <i class="fas fa-upload"></i> Upload Notes
+            </button>
+            <button class="tab-btn" onclick="showTab('tests')">
+                <i class="fas fa-list"></i> My Tests
+            </button>
+            <button class="tab-btn" onclick="showTab('practice')">
+                <i class="fas fa-pencil-alt"></i> Practice
+            </button>
+        </nav>
+
+        <!-- Upload Tab -->
+        <div id="upload-tab" class="tab-content active">
+            <div class="upload-section">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt fa-3x"></i>
+                    <p>Drag & drop your notes here or click to browse</p>
+                    <p class="file-types">Supports: TXT, PDF, DOCX</p>
+                    <input type="file" id="fileInput" accept=".txt,.pdf,.docx,.doc" hidden>
+                    <button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open"></i> Choose File
+                    </button>
+                </div>
+                <div id="uploadStatus" class="upload-status"></div>
+            </div>
+        </div>
+
+        <!-- Tests Tab -->
+        <div id="tests-tab" class="tab-content">
+            <div class="tests-header">
+                <h2><i class="fas fa-file-alt"></i> Your Typing Tests</h2>
+                <button class="btn btn-secondary" onclick="loadTests()">
+                    <i class="fas fa-sync"></i> Refresh
+                </button>
+            </div>
+            <div id="testsList" class="tests-grid">
+                <!-- Tests will be loaded here -->
+            </div>
+        </div>
+
+        <!-- Practice Tab -->
+        <div id="practice-tab" class="tab-content">
+            <div id="practiceArea" class="practice-area">
+                <div class="practice-header">
+                    <h2 id="testTitle">Select a test to practice</h2>
+                    <div class="stats-display">
+                        <div class="stat-item">
+                            <span class="stat-label">WPM</span>
+                            <span class="stat-value" id="wpmDisplay">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Accuracy</span>
+                            <span class="stat-value" id="accuracyDisplay">100%</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Time</span>
+                            <span class="stat-value" id="timerDisplay">0s</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="typingContainer" class="typing-container">
+                    <div id="textDisplay" class="text-display">
+                        <p class="placeholder">Upload notes or select a test to begin</p>
+                    </div>
+                    <textarea id="typingInput" class="typing-input" placeholder="Start typing here..." disabled></textarea>
+                </div>
+
+                <div class="practice-controls">
+                    <button class="btn btn-success" id="startBtn" onclick="startTest()">
+                        <i class="fas fa-play"></i> Start Test
+                    </button>
+                    <button class="btn btn-danger" onclick="resetTest()">
+                        <i class="fas fa-redo"></i> Reset
+                    </button>
+                    <button class="btn btn-info" onclick="showResults()">
+                        <i class="fas fa-chart-bar"></i> Results
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Modal -->
+    <div id="resultsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Test Results</h2>
+                <span class="close" onclick="closeResults()">&times;</span>
+            </div>
+            <div id="resultsContent" class="results-content">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
